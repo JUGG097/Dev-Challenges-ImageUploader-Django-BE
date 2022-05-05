@@ -40,6 +40,8 @@ INSTALLED_APPS = [
     "image_upload_app",
     "rest_framework",
     "requests",
+    "sentry_sdk",
+    "corsheaders",
 ]
 
 MIDDLEWARE = [
@@ -50,6 +52,8 @@ MIDDLEWARE = [
     "django.contrib.auth.middleware.AuthenticationMiddleware",
     "django.contrib.messages.middleware.MessageMiddleware",
     "django.middleware.clickjacking.XFrameOptionsMiddleware",
+    "corsheaders.middleware.CorsMiddleware",
+    "image_upload.middleware.CaptureExceptionMiddleware",
 ]
 
 ROOT_URLCONF = "image_upload.urls"
@@ -125,6 +129,6 @@ STATIC_URL = "static/"
 
 DEFAULT_AUTO_FIELD = "django.db.models.BigAutoField"
 
-REST_FRAMEWORK = {
-    "EXCEPTION_HANDLER": "image_upload_app.api.utils.custom_exception_handler"
-}
+# REST_FRAMEWORK = {"EXCEPTION_HANDLER": "image_upload.utils.custom_exception_handler"}
+CORS_ORIGIN_ALLOW_ALL = False
+CORS_ORIGIN_WHITELIST = ("http://localhost:3000",)
