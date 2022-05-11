@@ -18,3 +18,12 @@ jobs:
             cd /var/www/test.juggyprojects.com/
             rm -r /var/www/test.juggyprojects.com/Dev-Challenges-ImageUploader-Django-BE
             git clone git@github.com:JUGG097/Dev-Challenges-ImageUploader-Django-BE.git
+            cd Dev-Challenges-ImageUploader-Django-BE
+            virtualenv myprojectenv
+            source myprojectenv/bin/activate
+            pip install -r requirements.txt
+            pip install gunicorn
+            deactivate
+            cp /var/www/test.juggyprojects.com/.env_py /var/www/test.juggyprojects.com/Dev-Challenges-ImageUploader-Django-BE/image_upload/.env
+            cp /var/www/test.juggyprojects.com/prod_settings.py /var/www/test.juggyprojects.com/Dev-Challenges-ImageUploader-Django-BE/image_upload/settings.py
+            systemctl restart imguploaderpy
