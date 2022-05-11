@@ -16,7 +16,7 @@ def upload_image(req):
 
     # Validate file as Image
     if image_file.content_type not in ["image/jpeg", "image/jpg", "image/png"]:
-        return Response({"success": False, "message": "Invalid file"}, 400)
+        return Response({"success": False, "error": "Invalid file"}, 400)
 
     # Upload Request to cloudinary 3rd party service
     cloudinary_response = requests.post(
@@ -31,7 +31,7 @@ def upload_image(req):
     # Validate response from cloudinary 3rd party service
     if cloudinary_response.status_code != 200:
         return Response(
-            {"success": False, "message": "Invalid cloudinary credentials"}, 400
+            {"success": False, "error": "Invalid cloudinary credentials"}, 400
         )
 
     cloudinary_data = cloudinary_response.json()
