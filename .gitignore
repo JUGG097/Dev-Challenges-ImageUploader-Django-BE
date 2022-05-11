@@ -6,3 +6,5 @@ db.sqlite3
 .DS_Store
 /image_upload/__pycache__
 /image_upload_app/__pycache__
+prod_settings.py
+.env
