@@ -26,6 +26,4 @@ class CaptureExceptionMiddleware:
     def process_exception(self, request, exception):
         if exception:
             capture_exception(exception)
-            return JsonResponse(
-                {"success": False, "message": str(exception)}, status=500
-            )
+            return JsonResponse({"success": False, "error": str(exception)}, status=500)
