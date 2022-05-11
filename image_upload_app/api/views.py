@@ -2,6 +2,11 @@ from email.mime import image
 from rest_framework.response import Response
 from rest_framework.decorators import api_view
 import requests
+import environ
+
+# Initialise environment variables
+env = environ.Env()
+environ.Env.read_env()
 
 
 @api_view(["POST"])
@@ -15,8 +20,10 @@ def upload_image(req):
 
     # Upload Request to cloudinary 3rd party service
     cloudinary_response = requests.post(
-        "https://api.cloudinary.com/v1_1/dcym0jsal/image/upload",
-        data={"upload_preset": "dev-challenges"},
+        "https://api.cloudinary.com/v1_1/"
+        + env("CLOUDINARY_CLOUD_NAME")
+        + "/image/upload",
+        data={"upload_preset": env("CLOUDINARY_UPLOAD_RESET")},
         files={"file": image_file},
     )
 
